@@ -20,16 +20,16 @@ public class SubPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sub_id")
-    private Long sub_id;
+    private Long subId;
 
     @Column(name = "type")
     private String type;
 
     @Column(name = "start_time")
-    private Timestamp start_time;
+    private Timestamp startTime;
 
     @Column(name = "end_time")
-    private Timestamp end_time;
+    private Timestamp endTime;
 
     @Column(name = "location", nullable = false)
     private String location;
@@ -47,7 +47,7 @@ public class SubPlan {
     private String link;
 
     @Column(name = "is_complete")
-    private Boolean is_complete;
+    private Boolean isComplete;
 
     // SubPlan -> DailyPlan | daily_id : 외래키
     @ManyToOne(fetch = FetchType.EAGER)

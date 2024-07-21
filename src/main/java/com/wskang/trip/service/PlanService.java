@@ -9,13 +9,10 @@ public interface PlanService {
 
     PlanDto getPlan(Long id);
 
-//    List<PlanDto> getAllPlans();
-//
-//    PlanDto updatePlan(PlanDto todoDto, Long id);
-//
-//    void deletePlan(Long id);
-//
-//    PlanDto completePlan(Long id);
-//
-//    PlanDto inCompletePlan(Long id);
+    List<PlanDto> getAllPlans();
+
+    PlanDto updatePlan(PlanDto PlanDto, Long id);
+
+    void deletePlan(Long id);
+
 }

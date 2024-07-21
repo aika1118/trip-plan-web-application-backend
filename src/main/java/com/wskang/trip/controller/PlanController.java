@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("api/plans")
@@ -28,4 +30,26 @@ public class PlanController {
         PlanDto planDto = planService.getPlan(planId);
         return ResponseEntity.ok(planDto);
     }
+
+    // Build Get All REST API
+    @GetMapping
+    public ResponseEntity<List<PlanDto>> getAllPlans(){
+        List<PlanDto> plans = planService.getAllPlans();
+        return ResponseEntity.ok(plans);
+    }
+
+    // Build Update REST API
+    @PutMapping("{id}")
+    public ResponseEntity<PlanDto> updatePlan(@RequestBody PlanDto planDto, @PathVariable("id") Long planId){
+        PlanDto updatedPlan = planService.updatePlan(planDto, planId);
+        return ResponseEntity.ok(updatedPlan);
+    }
+
+    // Build Delete REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deletePlan(@PathVariable("id") Long planId){
+        planService.deletePlan(planId);
+        return ResponseEntity.ok("Plan deleted Successfully!");
+    }
+
 }

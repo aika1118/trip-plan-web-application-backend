@@ -10,8 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlanDto {
-    private Long plan_id;
-    private String plan_name;
-    private Long user_id; // 외래키
+    private Long planId;
+    private String planName;
+    private Long userId; // 외래키
 }
 

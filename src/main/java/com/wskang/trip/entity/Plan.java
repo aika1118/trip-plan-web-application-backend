@@ -19,10 +19,10 @@ public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "plan_id")
-    private Long plan_id;
+    private Long planId;
 
     @Column(name = "plan_name", nullable = false)
-    private String plan_name;
+    private String planName;
 
     // Plan -> User | user_id : 외래키
     @ManyToOne(fetch = FetchType.EAGER)
