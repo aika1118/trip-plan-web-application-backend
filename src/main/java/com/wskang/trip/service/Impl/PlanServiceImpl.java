@@ -2,6 +2,7 @@ package com.wskang.trip.service.Impl;
 
 import com.wskang.trip.dto.PlanDto;
 import com.wskang.trip.entity.Plan;
+import com.wskang.trip.exception.ResourceNotFoundException;
 import com.wskang.trip.repository.PlanRepository;
 import com.wskang.trip.service.PlanService;
 import lombok.AllArgsConstructor;
@@ -23,9 +24,15 @@ public class PlanServiceImpl implements PlanService {
         // Jpa entity
         Plan savedPlan = planRepository.save(plan);
 
-        // Convert saved Jpa entity into Dto
-        PlanDto savedPlanDto = modelMapper.map(savedPlan, PlanDto.class);
+        // return saved Jpa entity into Dto
+        return modelMapper.map(savedPlan, PlanDto.class);
+    }
 
-        return savedPlanDto;
+    @Override
+    public PlanDto getPlan(Long id) {
+        Plan plan = planRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Plan not found with id:" + id));
+
+        return modelMapper.map(plan, PlanDto.class);
     }
 }

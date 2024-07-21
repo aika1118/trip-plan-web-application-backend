@@ -21,4 +21,11 @@ public class PlanController {
         PlanDto savedPlan = planService.addPlan(planDto);
         return new ResponseEntity<>(savedPlan, HttpStatus.CREATED);
     }
+
+    // Build Get REST API
+    @GetMapping("{id}")
+    public ResponseEntity<PlanDto> getTodo(@PathVariable("id") Long planId){
+        PlanDto planDto = planService.getPlan(planId);
+        return ResponseEntity.ok(planDto);
+    }
 }
