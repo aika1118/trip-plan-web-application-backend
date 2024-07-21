@@ -19,8 +19,8 @@ public class SubPlan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "subplan_id")
-    private Integer subplan_id;
+    @Column(name = "sub_id")
+    private Long sub_id;
 
     @Column(name = "type")
     private String type;
@@ -38,7 +38,7 @@ public class SubPlan {
     private String vehicle;
 
     @Column(name = "money")
-    private Integer money;
+    private Long money;
 
     @Column(name = "comment")
     private String comment;
@@ -49,9 +49,9 @@ public class SubPlan {
     @Column(name = "is_complete")
     private Boolean is_complete;
 
-    // SubPlan -> Plan | plan_id : 외래키
+    // SubPlan -> DailyPlan | daily_id : 외래키
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "plan_id", nullable = false)
-    private Plan plan;
+    @JoinColumn(name = "daily_id", nullable = false)
+    private DailyPlan dailyPlan;
 }
 

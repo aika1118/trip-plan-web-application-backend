@@ -19,7 +19,7 @@ public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "plan_id")
-    private Integer plan_id;
+    private Long plan_id;
 
     @Column(name = "plan_name", nullable = false)
     private String plan_name;
@@ -29,8 +29,8 @@ public class Plan {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // SubPlan -> Plan | plan_id : 외래키
+    // DailyPlan -> Plan | plan_id : 외래키
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<SubPlan> subplans;
+    private Set<DailyPlan> dailyPlans;
 }
 
