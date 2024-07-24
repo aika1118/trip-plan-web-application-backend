@@ -26,7 +26,7 @@ public class PlanController {
 
     // Build Get REST API
     @GetMapping("{id}")
-    public ResponseEntity<PlanDto> getTodo(@PathVariable("id") Long planId){
+    public ResponseEntity<PlanDto> getPlan(@PathVariable("id") Long planId){
         PlanDto planDto = planService.getPlan(planId);
         return ResponseEntity.ok(planDto);
     }

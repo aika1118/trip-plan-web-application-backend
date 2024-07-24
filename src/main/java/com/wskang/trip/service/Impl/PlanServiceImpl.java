@@ -16,8 +16,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PlanServiceImpl implements PlanService {
 
+    // 의존성 주입
     private PlanRepository planRepository;
-    private ModelMapper modelMapper;
+    private ModelMapper modelMapper; // spring bean 이며 생성자를 통해 의존성 주입 진행
 
     @Override
     public PlanDto addPlan(PlanDto planDto) {
@@ -48,14 +49,14 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public PlanDto updatePlan(PlanDto PlanDto, Long id) {
+    public PlanDto updatePlan(PlanDto planDto, Long id) {
 
         // update 하려는 plan의 id가 유효한지 검사
         Plan plan = planRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Plan not found with id:" + id));
 
         // update를 위해 새로운 값을 쓴다
-        plan.setPlanName(PlanDto.getPlanName());
+        plan.setPlanName(planDto.getPlanName());
 
         Plan updatedPlan = planRepository.save(plan); // primary key가 동일한 값에 대해 save는 update로 진행함
 

@@ -13,6 +13,7 @@ public interface PlanService {
 
     PlanDto updatePlan(PlanDto PlanDto, Long id);
 
+    // 외래키 관계에 의해 plan 삭제 시 해당 planId를 외래키로 갖고 있는 모든 dailyPlan의 정보도 같이 삭제됨
     void deletePlan(Long id);
 
 }
