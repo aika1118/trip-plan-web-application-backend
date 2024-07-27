@@ -32,9 +32,9 @@ public class PlanController {
     }
 
     // Build Get All REST API
-    @GetMapping
-    public ResponseEntity<List<PlanDto>> getAllPlans(){
-        List<PlanDto> plans = planService.getAllPlans();
+    @GetMapping("user/{userId}")
+    public ResponseEntity<List<PlanDto>> getAllPlans(@PathVariable("userId") Long userId){
+        List<PlanDto> plans = planService.getAllPlans(userId);
         return ResponseEntity.ok(plans);
     }
 

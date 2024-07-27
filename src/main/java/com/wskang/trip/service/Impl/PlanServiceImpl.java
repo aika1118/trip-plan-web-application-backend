@@ -1,9 +1,13 @@
 package com.wskang.trip.service.Impl;
 
+import com.wskang.trip.dto.DailyPlanDto;
 import com.wskang.trip.dto.PlanDto;
+import com.wskang.trip.entity.DailyPlan;
 import com.wskang.trip.entity.Plan;
+import com.wskang.trip.entity.User;
 import com.wskang.trip.exception.ResourceNotFoundException;
 import com.wskang.trip.repository.PlanRepository;
+import com.wskang.trip.repository.UserRepository;
 import com.wskang.trip.service.PlanService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,6 +21,7 @@ import java.util.stream.Collectors;
 public class PlanServiceImpl implements PlanService {
 
     // 의존성 주입
+    private UserRepository userRepository;
     private PlanRepository planRepository;
     private ModelMapper modelMapper; // spring bean 이며 생성자를 통해 의존성 주입 진행
 
@@ -40,11 +45,17 @@ public class PlanServiceImpl implements PlanService {
         return modelMapper.map(plan, PlanDto.class);
     }
 
+    // 특정 userId가 소유하고 있는 모든 Plan을 GET 함
     @Override
-    public List<PlanDto> getAllPlans() {
-        List<Plan> plans = planRepository.findAll();
+    public List<PlanDto> getAllPlans(Long id) {
+        // 먼저 userId를 기본키로 갖는 user 엔티티를 가져온다
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id:" + id));
 
-        return plans.stream().map((plan) -> modelMapper.map(plan, PlanDto.class))
+        // 해당 user에 해당하는 모든 Plan 엔티티를 가져온다
+        List<Plan> Plans = planRepository.findByUser(user);
+
+        return Plans.stream().map((plan) -> modelMapper.map(plan, PlanDto.class))
                 .collect(Collectors.toList());
     }
 
