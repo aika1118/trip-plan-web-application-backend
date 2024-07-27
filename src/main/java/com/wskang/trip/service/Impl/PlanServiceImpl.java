@@ -47,10 +47,10 @@ public class PlanServiceImpl implements PlanService {
 
     // 특정 userId가 소유하고 있는 모든 Plan을 GET 함
     @Override
-    public List<PlanDto> getAllPlans(Long id) {
+    public List<PlanDto> getAllPlans(String userName) {
         // 먼저 userId를 기본키로 갖는 user 엔티티를 가져온다
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id:" + id));
+        User user = userRepository.findByUsername(userName)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with userName:" + userName));
 
         // 해당 user에 해당하는 모든 Plan 엔티티를 가져온다
         List<Plan> Plans = planRepository.findByUser(user);

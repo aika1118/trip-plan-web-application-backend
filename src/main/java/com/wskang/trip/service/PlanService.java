@@ -9,7 +9,7 @@ public interface PlanService {
 
     PlanDto getPlan(Long id);
 
-    List<PlanDto> getAllPlans(Long id);
+    List<PlanDto> getAllPlans(String userName);
 
     PlanDto updatePlan(PlanDto PlanDto, Long id);
 
