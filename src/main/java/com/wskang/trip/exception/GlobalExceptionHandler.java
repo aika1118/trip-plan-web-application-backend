@@ -24,4 +24,17 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND); // 클라이언트에 반환
     }
+
+    // 요청된 데이터에 대해 이미 중복된 값이 있어 서버에서 처리를 거부하는 경우 예외처리 (ex. 중복된 이름으로 회원가입 시도)
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorDetails> handleBadRequestException(BadRequestException exception,
+                                                               WebRequest webRequest){
+        ErrorDetails errorDetails = new ErrorDetails(
+                LocalDateTime.now(),
+                exception.getMessage(),
+                webRequest.getDescription(false) // url 정보만 return 하게될 것
+        );
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST); // 클라이언트에 반환
+    }
 }

@@ -3,6 +3,7 @@ package com.wskang.trip.controller;
 import com.wskang.trip.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
@@ -14,6 +15,7 @@ public class UserController {
 
     // userName에 대응하는 userId를 return 함
     @GetMapping("{userName}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<Long> getUserId(@PathVariable("userName") String userName){
         Long userId = userService.getUserId(userName);
         return ResponseEntity.ok(userId);

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 
 // (exclude = { SecurityAutoConfiguration.class }) : 어노테이션에서 spring security 제외
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication
 public class TripBackendApplication {
 
 	@Bean
