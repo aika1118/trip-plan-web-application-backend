@@ -47,7 +47,7 @@ public class SpringSecurityConfig {
         // RESTful API에서 JWT를 사용하면 무상태(stateless) 통신을 하므로 CSRF 보호가 불필요
         http.csrf((csrf) -> csrf.disable()).authorizeHttpRequests((authorize) -> {
             authorize.requestMatchers("/api/auth/**").permitAll(); // 계정 생성 또는 최초 로그인 시도시에는 JWT가 없어서 모두 허가
-            authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll(); // 클라이언트의 preflight request는 모두 허가 (preflight를 일단 받아야 서버에 request를 보낼 수 있는 상태인지 판단할 수 있기 때문)
+            authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll(); // 클라이언트의 preflight request는 모두 허가
             authorize.anyRequest().authenticated(); // 이외 모든 요청에 대해 JWT 검증 적용
         }).addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class); // HTTP 요청을 가로채 해당 필터에서 JWT 인증을 먼저 진행할 수 있도록 설정
 

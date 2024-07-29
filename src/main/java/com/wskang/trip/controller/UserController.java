@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private UserService userService; // 생성자에서 bean에 등록된 해당 service 의존성 가져옴
 
-    // userName에 대응하는 userId를 return 함
+    // username 또는 email에 대응하는 userId를 return 함
     @GetMapping("{userName}")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<Long> getUserId(@PathVariable("userName") String userName){

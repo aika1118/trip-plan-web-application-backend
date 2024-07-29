@@ -18,12 +18,12 @@ public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
 
-    // username을 통해 userId를 return 함
+    // username 또는 email 통해 userId를 return 함
     @Override
-    public Long getUserId(String userName) {
+    public Long getUserId(String userNameOrEmail) {
         // userName을 통해 user 엔티티 가져오기 (username은 유니크 키)
-        User user = userRepository.findByUsername(userName)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with userName:" + userName));
+        User user = userRepository.findByUsernameOrEmail(userNameOrEmail, userNameOrEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found" + userNameOrEmail));
 
         // 해당 user의 userId를 return
         return user.getUserId();
