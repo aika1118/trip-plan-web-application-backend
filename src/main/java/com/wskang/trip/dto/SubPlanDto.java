@@ -22,6 +22,7 @@ public class SubPlanDto {
     private String location;
     private String vehicle;
     private Long money;
+    private String currency;
     private String comment;
     private Boolean isComplete;
     private Long dailyId; // 외래키

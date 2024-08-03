@@ -72,6 +72,7 @@ public class SubPlanServiceImpl implements SubPlanService {
         subPlan.setLocation(subPlanDto.getLocation());
         subPlan.setVehicle(subPlanDto.getVehicle());
         subPlan.setMoney(subPlanDto.getMoney());
+        subPlan.setCurrency(subPlanDto.getCurrency());
         subPlan.setComment(subPlanDto.getComment());
         subPlan.setIsComplete(subPlanDto.getIsComplete());
 
