@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalTime;
 
 @Setter
 @Getter
@@ -17,8 +18,8 @@ public class SubPlanDto {
 
     private Long subId;
     private String type;
-    private String startTime;
-    private String endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private String location;
     private String vehicle;
     private Long money;

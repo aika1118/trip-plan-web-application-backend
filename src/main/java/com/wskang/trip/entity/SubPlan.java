@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.Set;
 
 @Getter
@@ -26,10 +27,10 @@ public class SubPlan {
     private String type;
 
     @Column(name = "start_time")
-    private String startTime;
+    private LocalTime startTime;
 
     @Column(name = "end_time")
-    private String endTime;
+    private LocalTime endTime;
 
     @Column(name = "location", nullable = false)
     private String location;
