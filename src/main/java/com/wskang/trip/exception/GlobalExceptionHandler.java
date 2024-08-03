@@ -1,5 +1,6 @@
 package com.wskang.trip.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,6 +30,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ErrorDetails> handleBadRequestException(BadRequestException exception,
                                                                WebRequest webRequest){
+        ErrorDetails errorDetails = new ErrorDetails(
+                LocalDateTime.now(),
+                exception.getMessage(),
+                webRequest.getDescription(false) // url 정보만 return 하게될 것
+        );
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST); // 클라이언트에 반환
+    }
+
+    // 데이터베이스 제약 조건에 의한 예외처리 (ex. not null Column에 null이 들어오려는 경우)
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorDetails> handleDataIntegrityViolationException(DataIntegrityViolationException exception,
+                                                                        WebRequest webRequest) {
+
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
                 exception.getMessage(),

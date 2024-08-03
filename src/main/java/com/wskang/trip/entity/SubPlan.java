@@ -40,6 +40,9 @@ public class SubPlan {
     @Column(name = "money")
     private Long money;
 
+    @Column(name = "currency", nullable = false)
+    private String currency;
+
     @Column(name = "comment")
     private String comment;
 
