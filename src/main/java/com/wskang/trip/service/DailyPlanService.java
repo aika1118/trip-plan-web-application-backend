@@ -1,7 +1,6 @@
 package com.wskang.trip.service;
 
 import com.wskang.trip.dto.DailyPlanDto;
-import com.wskang.trip.dto.PlanDto;
 
 import java.util.List;
 

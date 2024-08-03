@@ -43,9 +43,6 @@ public class SubPlan {
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "link")
-    private String link;
-
     @Column(name = "is_complete")
     private Boolean isComplete;
 

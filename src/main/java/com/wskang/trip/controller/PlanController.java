@@ -22,8 +22,8 @@ public class PlanController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<PlanDto> addPlan(@RequestBody PlanDto planDto){
-        PlanDto savedPlan = planService.addPlan(planDto);
-        return new ResponseEntity<>(savedPlan, HttpStatus.CREATED);
+        PlanDto savedPlanDto = planService.addPlan(planDto);
+        return new ResponseEntity<>(savedPlanDto, HttpStatus.CREATED);
     }
 
     // Build Get REST API

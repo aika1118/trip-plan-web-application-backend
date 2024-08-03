@@ -23,8 +23,8 @@ public class DailyPlanController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')") // SecurityContext 에 해당하는 ROLE 을 소유하고 있을 때만 메서드 호출 허용 (그렇지 않으면 HTTP 403 Forbidden 반환)
     public ResponseEntity<DailyPlanDto> addDailyPlan(@RequestBody DailyPlanDto dailyPlanDto){
-        DailyPlanDto savedDailyPlan = dailyPlanService.addDailyPlan(dailyPlanDto);
-        return new ResponseEntity<>(savedDailyPlan, HttpStatus.CREATED);
+        DailyPlanDto savedDailyPlanDto = dailyPlanService.addDailyPlan(dailyPlanDto);
+        return new ResponseEntity<>(savedDailyPlanDto, HttpStatus.CREATED);
     }
 
     // 특정 dailyId를 갖는 dailyPlan 1개를 return 하는 REST API
@@ -54,7 +54,7 @@ public class DailyPlanController {
     // dailyPlan을 delete 하는 REST API
     @DeleteMapping("{dailyId}")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    public ResponseEntity<String> deletePlan(@PathVariable("dailyId") Long dailyId){
+    public ResponseEntity<String> deleteDailyPlan(@PathVariable("dailyId") Long dailyId){
         dailyPlanService.deleteDailyPlan(dailyId);
         return ResponseEntity.ok("Daily Plan deleted Successfully!");
     }
