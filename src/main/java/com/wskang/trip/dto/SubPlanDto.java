@@ -17,8 +17,8 @@ public class SubPlanDto {
 
     private Long subId;
     private String type;
-    private Timestamp startTime;
-    private Timestamp endTime;
+    private String startTime;
+    private String endTime;
     private String location;
     private String vehicle;
     private Long money;

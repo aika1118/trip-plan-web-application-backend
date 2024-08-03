@@ -26,10 +26,10 @@ public class SubPlan {
     private String type;
 
     @Column(name = "start_time")
-    private Timestamp startTime;
+    private String startTime;
 
     @Column(name = "end_time")
-    private Timestamp endTime;
+    private String endTime;
 
     @Column(name = "location", nullable = false)
     private String location;

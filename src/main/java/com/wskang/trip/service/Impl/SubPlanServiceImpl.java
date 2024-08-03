@@ -3,12 +3,15 @@ package com.wskang.trip.service.Impl;
 import com.wskang.trip.dto.SubPlanDto;
 import com.wskang.trip.entity.DailyPlan;
 import com.wskang.trip.entity.SubPlan;
+import com.wskang.trip.exception.BadRequestException;
 import com.wskang.trip.exception.ResourceNotFoundException;
 import com.wskang.trip.repository.DailyPlanRepository;
 import com.wskang.trip.repository.SubPlanRepository;
 import com.wskang.trip.service.SubPlanService;
+import com.wskang.trip.utils.ValidateTimeUtil;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +28,15 @@ public class SubPlanServiceImpl implements SubPlanService {
 
     @Override
     public SubPlanDto addSubPlan(SubPlanDto subPlanDto) {
+
+        // startTime이 유효한 {HH:MM} 시간 formatting 인지 검증
+        if ( !ValidateTimeUtil.isValidTime(subPlanDto.getStartTime()) )
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "startTime has a invalid time formatting in {HH:MM} : " + subPlanDto.getStartTime());
+
+        // endTime이 유효한 {HH:MM} 시간 formatting 인지 검증
+        if ( !ValidateTimeUtil.isValidTime(subPlanDto.getEndTime()) )
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "endTime has a invalid time formatting in {HH:MM} : " + subPlanDto.getEndTime());
+
         // convert Dto into Jpa entity
         SubPlan subPlan = modelMapper.map(subPlanDto, SubPlan.class);
 
@@ -64,6 +76,14 @@ public class SubPlanServiceImpl implements SubPlanService {
         // update 하려는 subPlan의 id가 유효한지 검사
         SubPlan subPlan = subPlanRepository.findById(subId)
                 .orElseThrow(() -> new ResourceNotFoundException("Sub Plan not found with id:" + subId));
+
+        // startTime이 유효한 {HH:MM} 시간 formatting 인지 검증
+        if ( !ValidateTimeUtil.isValidTime(subPlanDto.getStartTime()) )
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "startTime has a invalid time formatting in {HH:MM} : " + subPlanDto.getStartTime());
+
+        // endTime이 유효한 {HH:MM} 시간 formatting 인지 검증
+        if ( !ValidateTimeUtil.isValidTime(subPlanDto.getEndTime()) )
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "endTime has a invalid time formatting in {HH:MM} : " + subPlanDto.getEndTime());
 
         // update를 위해 새로운 값을 쓴다
         subPlan.setType(subPlanDto.getType());
