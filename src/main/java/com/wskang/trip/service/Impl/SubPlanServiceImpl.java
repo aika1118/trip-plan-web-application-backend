@@ -8,6 +8,7 @@ import com.wskang.trip.exception.ResourceNotFoundException;
 import com.wskang.trip.repository.DailyPlanRepository;
 import com.wskang.trip.repository.SubPlanRepository;
 import com.wskang.trip.service.SubPlanService;
+import com.wskang.trip.utils.ValidateSubPlanUtil;
 import com.wskang.trip.utils.ValidateTimeUtil;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -29,13 +30,8 @@ public class SubPlanServiceImpl implements SubPlanService {
     @Override
     public SubPlanDto addSubPlan(SubPlanDto subPlanDto) {
 
-//        // startTime이 유효한 {HH:MM} 시간 formatting 인지 검증
-//        if ( !ValidateTimeUtil.isValidTime(subPlanDto.getStartTime()) )
-//            throw new BadRequestException(HttpStatus.BAD_REQUEST, "startTime has a invalid time formatting in {HH:MM} : " + subPlanDto.getStartTime());
-//
-//        // endTime이 유효한 {HH:MM} 시간 formatting 인지 검증
-//        if ( !ValidateTimeUtil.isValidTime(subPlanDto.getEndTime()) )
-//            throw new BadRequestException(HttpStatus.BAD_REQUEST, "endTime has a invalid time formatting in {HH:MM} : " + subPlanDto.getEndTime());
+        // 유효성 검증
+        ValidateSubPlanUtil.validateDailyPlan(subPlanDto.getDailyId());
 
         // convert Dto into Jpa entity
         SubPlan subPlan = modelMapper.map(subPlanDto, SubPlan.class);
@@ -53,12 +49,19 @@ public class SubPlanServiceImpl implements SubPlanService {
         SubPlan subPlan = subPlanRepository.findById(subId)
                 .orElseThrow(() -> new ResourceNotFoundException("Sub Plan not found with id:" + subId));
 
+        // 유효성 검증
+        ValidateSubPlanUtil.validateDailyPlan(subPlan.getDailyPlan().getDailyId());
+
         return modelMapper.map(subPlan, SubPlanDto.class);
     }
 
     // 특정 dailyId 갖는 Daily Plan의 모든 sub Plan return
     @Override
     public List<SubPlanDto> getAllSubPlans(Long dailyId) {
+
+        // 유효성 검증
+        ValidateSubPlanUtil.validateDailyPlan(dailyId);
+
         // 먼저 dailyId 기본키로 갖는 dailyPlan 엔티티를 가져온다
         DailyPlan dailyPlan = dailyPlanRepository.findById(dailyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Daily Plan not found with id:" + dailyId));
@@ -77,13 +80,9 @@ public class SubPlanServiceImpl implements SubPlanService {
         SubPlan subPlan = subPlanRepository.findById(subId)
                 .orElseThrow(() -> new ResourceNotFoundException("Sub Plan not found with id:" + subId));
 
-//        // startTime이 유효한 {HH:MM} 시간 formatting 인지 검증
-//        if ( !ValidateTimeUtil.isValidTime(subPlanDto.getStartTime()) )
-//            throw new BadRequestException(HttpStatus.BAD_REQUEST, "startTime has a invalid time formatting in {HH:MM} : " + subPlanDto.getStartTime());
-//
-//        // endTime이 유효한 {HH:MM} 시간 formatting 인지 검증
-//        if ( !ValidateTimeUtil.isValidTime(subPlanDto.getEndTime()) )
-//            throw new BadRequestException(HttpStatus.BAD_REQUEST, "endTime has a invalid time formatting in {HH:MM} : " + subPlanDto.getEndTime());
+        // 유효성 검증
+        ValidateSubPlanUtil.validateDailyPlan(subPlan.getDailyPlan().getDailyId());
+
 
         // update를 위해 새로운 값을 쓴다
         subPlan.setType(subPlanDto.getType());
@@ -107,6 +106,9 @@ public class SubPlanServiceImpl implements SubPlanService {
         SubPlan subPlan = subPlanRepository.findById(subId)
                 .orElseThrow(() -> new ResourceNotFoundException("Sub Plan not found with id:" + subId));
 
+        // 유효성 검증
+        ValidateSubPlanUtil.validateDailyPlan(subPlan.getDailyPlan().getDailyId());
+
         subPlanRepository.deleteById(subId);
     }
 
@@ -115,6 +117,9 @@ public class SubPlanServiceImpl implements SubPlanService {
     public SubPlanDto completeSubPlan(Long subId) {
         SubPlan subPlan = subPlanRepository.findById(subId)
                 .orElseThrow(() -> new ResourceNotFoundException("Sub Plan not found with id:" + subId));
+
+        // 유효성 검증
+        ValidateSubPlanUtil.validateDailyPlan(subPlan.getDailyPlan().getDailyId());
 
         subPlan.setIsComplete(Boolean.TRUE);
 
@@ -128,6 +133,9 @@ public class SubPlanServiceImpl implements SubPlanService {
     public SubPlanDto inCompleteSubPlan(Long subId) {
         SubPlan subPlan = subPlanRepository.findById(subId)
                 .orElseThrow(() -> new ResourceNotFoundException("Sub Plan not found with id:" + subId));
+
+        // 유효성 검증
+        ValidateSubPlanUtil.validateDailyPlan(subPlan.getDailyPlan().getDailyId());
 
         subPlan.setIsComplete(Boolean.FALSE);
 

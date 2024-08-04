@@ -8,6 +8,7 @@ import com.wskang.trip.exception.ResourceNotFoundException;
 import com.wskang.trip.repository.DailyPlanRepository;
 import com.wskang.trip.repository.PlanRepository;
 import com.wskang.trip.service.DailyPlanService;
+import com.wskang.trip.utils.ValidateDailyPlanUtil;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,10 @@ public class DailyPlanServiceImpl implements DailyPlanService {
 
     @Override
     public DailyPlanDto addDailyPlan(DailyPlanDto dailyPlanDto) {
+
+        // 유효성 검증
+        ValidateDailyPlanUtil.validateDailyPlan(dailyPlanDto.getPlanId());
+
         // convert Dto into Jpa entity
         DailyPlan dailyPlan = modelMapper.map(dailyPlanDto, DailyPlan.class);
 
@@ -42,12 +47,18 @@ public class DailyPlanServiceImpl implements DailyPlanService {
         DailyPlan dailyPlan = dailyPlanRepository.findById(dailyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Daily Plan not found with id:" + dailyId));
 
+        // 유효성 검증
+        ValidateDailyPlanUtil.validateDailyPlan(dailyPlan.getPlan().getPlanId());
+
         return modelMapper.map(dailyPlan, DailyPlanDto.class);
     }
 
     // 특정 planId를 갖는 Plan의 모든 dailyPlan return
     @Override
     public List<DailyPlanDto> getAllDailyPlans(Long planId) {
+
+        // 유효성 검증
+        ValidateDailyPlanUtil.validateDailyPlan(planId);
 
         // 먼저 planId를 기본키로 갖는 plan 엔티티를 가져온다
         Plan plan = planRepository.findById(planId)
@@ -67,6 +78,9 @@ public class DailyPlanServiceImpl implements DailyPlanService {
         DailyPlan dailyPlan = dailyPlanRepository.findById(dailyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Daily Plan not found with id:" + dailyId));
 
+        // 유효성 검증
+        ValidateDailyPlanUtil.validateDailyPlan(dailyPlan.getPlan().getPlanId());
+
         // update를 위해 새로운 값을 쓴다
         dailyPlan.setDailyName(dailyPlanDto.getDailyName());
 
@@ -80,6 +94,9 @@ public class DailyPlanServiceImpl implements DailyPlanService {
     public void deleteDailyPlan(Long dailyId) {
         DailyPlan dailyPlan = dailyPlanRepository.findById(dailyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Daily Plan not found with id:" + dailyId));
+
+        // 유효성 검증
+        ValidateDailyPlanUtil.validateDailyPlan(dailyPlan.getPlan().getPlanId());
 
         dailyPlanRepository.deleteById(dailyId);
     }

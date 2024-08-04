@@ -48,7 +48,7 @@ public class SubPlan {
     private String comment;
 
     @Column(name = "is_complete")
-    private Boolean isComplete;
+    private Boolean isComplete; // false로 기본값 지정
 
     // SubPlan -> DailyPlan | daily_id : 외래키
     @ManyToOne(fetch = FetchType.EAGER)

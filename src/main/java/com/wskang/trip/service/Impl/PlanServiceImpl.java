@@ -5,12 +5,17 @@ import com.wskang.trip.dto.PlanDto;
 import com.wskang.trip.entity.DailyPlan;
 import com.wskang.trip.entity.Plan;
 import com.wskang.trip.entity.User;
+import com.wskang.trip.exception.BadRequestException;
 import com.wskang.trip.exception.ResourceNotFoundException;
 import com.wskang.trip.repository.PlanRepository;
 import com.wskang.trip.repository.UserRepository;
 import com.wskang.trip.service.PlanService;
+import com.wskang.trip.utils.ValidatePlanUtil;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +32,10 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public PlanDto addPlan(PlanDto planDto) {
+
+        // 유효성 검증
+        ValidatePlanUtil.validatePlan(planDto.getUserId());
+
         // convert Dto into Jpa entity
         Plan plan = modelMapper.map(planDto, Plan.class);
 
@@ -39,8 +48,12 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public PlanDto getPlan(Long id) {
+
         Plan plan = planRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Plan not found with id:" + id));
+
+        // 유효성 검증
+        ValidatePlanUtil.validatePlan(plan.getUser().getUserId());
 
         return modelMapper.map(plan, PlanDto.class);
     }
@@ -48,6 +61,9 @@ public class PlanServiceImpl implements PlanService {
     // 특정 userId가 소유하고 있는 모든 Plan을 GET 함
     @Override
     public List<PlanDto> getAllPlans(Long id) {
+        // 유효성 검증
+        ValidatePlanUtil.validatePlan(id);
+
         // 먼저 userId를 기본키로 갖는 user 엔티티를 가져온다
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id:" + id));
@@ -66,6 +82,9 @@ public class PlanServiceImpl implements PlanService {
         Plan plan = planRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Plan not found with id:" + id));
 
+        // 유효성 검증
+        ValidatePlanUtil.validatePlan(plan.getUser().getUserId());
+
         // update를 위해 새로운 값을 쓴다
         plan.setPlanName(planDto.getPlanName());
 
@@ -79,6 +98,9 @@ public class PlanServiceImpl implements PlanService {
 
         Plan plan = planRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Plan not found with id:" + id));
+
+        // 유효성 검증
+        ValidatePlanUtil.validatePlan(plan.getUser().getUserId());
 
         planRepository.deleteById(id);
     }

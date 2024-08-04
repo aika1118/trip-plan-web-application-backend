@@ -5,6 +5,7 @@ import com.wskang.trip.dto.PlanDto;
 import java.util.List;
 
 public interface PlanService {
+
     PlanDto addPlan(PlanDto planDto);
 
     PlanDto getPlan(Long id);
