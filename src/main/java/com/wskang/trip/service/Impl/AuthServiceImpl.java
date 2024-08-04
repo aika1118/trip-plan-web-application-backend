@@ -48,6 +48,18 @@ public class AuthServiceImpl implements AuthService {
             throw new BadRequestException(HttpStatus.BAD_REQUEST, "Email is already exists!");
         }
 
+        // username, email, password 검증 로직 추가 (클라이언트에도 검증로직 있지만 안전을 위해 서버에도 추가)
+
+        // username :  '@'가 들어가 있으면 안됨
+        // email : '@'가 반드시 포함되어야함
+
+        if (registerDto.getUsername().contains("@"))
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Username cannot contain a '@'");
+        if (!registerDto.getEmail().contains("@"))
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Email should contain a '@'");
+
+
+
         // registerDto 정보 기반하여 User 엔티티에 저장
         User user = new User();
         user.setUsername(registerDto.getUsername());
