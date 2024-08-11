@@ -22,7 +22,8 @@ public class ValidateUserUtil {
     // 클라이언트에서 보낸 DTO가 현재 인증된 user가 소유하고 있는 것이 맞을지 체크
     public static void validateUser(Long userId) {
         if (userId == null)
-            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Bad Request with no id");
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Bad Request with no id",
+                    "INVALID_ID");
 
         // 현재 인증된 사용자 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -37,6 +38,7 @@ public class ValidateUserUtil {
         if (user.getUsername().equals(usernameOrEmail) || user.getEmail().equals(usernameOrEmail))
             return;
 
-        throw new BadRequestException(HttpStatus.BAD_REQUEST, "Authorization failed!");
+        throw new BadRequestException(HttpStatus.BAD_REQUEST, "Authorization failed!",
+                "FAIL_AUTHORIZATION");
     }
 }

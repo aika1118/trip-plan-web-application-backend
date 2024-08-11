@@ -40,12 +40,14 @@ public class AuthServiceImpl implements AuthService {
 
         // check username is already exists in database
         if (userRepository.existsByUsername(registerDto.getUsername())){
-            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Username already exists!");
+                throw new BadRequestException(HttpStatus.BAD_REQUEST, "Username is already in DB !",
+                        "DUPLICATE_USERNAME");
         }
 
         // check email is already exists in database
         if(userRepository.existsByEmail(registerDto.getEmail())){
-            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Email is already exists!");
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Email is already in DB !",
+                    "DUPLICATE_EMAIL");
         }
 
         // username, email, password 검증 로직 추가 (클라이언트에도 검증로직 있지만 안전을 위해 서버에도 추가)
@@ -54,9 +56,11 @@ public class AuthServiceImpl implements AuthService {
         // email : '@'가 반드시 포함되어야함
 
         if (registerDto.getUsername().contains("@"))
-            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Username cannot contain a '@'");
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Username cannot contain a '@'",
+                    "INVALID_USERNAME");
         if (!registerDto.getEmail().contains("@"))
-            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Email should contain a '@'");
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "Email should contain a '@'",
+                    "INVALID_EMAIL");
 
 
 

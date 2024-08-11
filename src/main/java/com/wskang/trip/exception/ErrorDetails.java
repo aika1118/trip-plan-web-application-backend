@@ -15,5 +15,6 @@ import java.time.LocalDateTime;
 public class ErrorDetails {
     private LocalDateTime timeStamp;
     private String message;
+    private String errorType;
     private String details;
 }

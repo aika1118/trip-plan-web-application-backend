@@ -20,6 +20,7 @@ public class GlobalExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
                 exception.getMessage(),
+                "NOT_FOUND",
                 webRequest.getDescription(false) // url 정보만 return 하게될 것
         );
 
@@ -33,6 +34,7 @@ public class GlobalExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
                 exception.getMessage(),
+                exception.getErrorType(),
                 webRequest.getDescription(false) // url 정보만 return 하게될 것
         );
 
@@ -47,6 +49,7 @@ public class GlobalExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
                 exception.getMessage(),
+                "NULL_VIOLATION",
                 webRequest.getDescription(false) // url 정보만 return 하게될 것
         );
 
