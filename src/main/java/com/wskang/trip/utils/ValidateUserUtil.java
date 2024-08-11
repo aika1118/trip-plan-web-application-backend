@@ -38,7 +38,7 @@ public class ValidateUserUtil {
         if (user.getUsername().equals(usernameOrEmail) || user.getEmail().equals(usernameOrEmail))
             return;
 
-        throw new BadRequestException(HttpStatus.BAD_REQUEST, "Authorization failed!",
-                "FAIL_AUTHORIZATION");
+        throw new BadRequestException(HttpStatus.BAD_REQUEST, "Cannot access to other user",
+                "BAD_ACCESS");
     }
 }

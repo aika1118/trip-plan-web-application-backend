@@ -21,6 +21,7 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now(),
                 exception.getMessage(),
                 "NOT_FOUND",
+                //exception.getErrorType(),
                 webRequest.getDescription(false) // url 정보만 return 하게될 것
         );
 
