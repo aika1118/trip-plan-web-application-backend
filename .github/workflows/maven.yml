@@ -59,6 +59,7 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_SSH_USER }}
         key: ${{ secrets.EC2_SSH_KEY }} 
+        port: ${{ secrets.EC2_PORT }} 
         script: |
           # docker 이미지 가져오기
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
