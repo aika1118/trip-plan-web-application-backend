@@ -1,0 +1,76 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 22
+      uses: actions/setup-java@v4
+      with:
+        java-version: '22'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Create application.properties
+      run: |
+        mkdir -p src/main/resources
+        echo "spring.application.name=trip-backend" >> src/main/resources/application.properties
+        echo "spring.datasource.url=${{ secrets.APP_DB_URL }}" >> src/main/resources/application.properties 
+        echo "spring.datasource.username=${{ secrets.APP_DB_USERNAME}}" >> src/main/resources/application.properties 
+        echo "spring.datasource.password=${{ secrets.APP_DB_PASSWORD}}" >> src/main/resources/application.properties 
+        echo "spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect" >> src/main/resources/application.properties
+        echo "spring.jpa.hibernate.ddl-auto=validate" >> src/main/resources/application.properties
+        echo "spring.jpa.hibernate.naming.physical-strategy = org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl" >> src/main/resources/application.properties
+        echo "app.jwt-secret=${{ secrets.APP_JWT_SECRET}}" >> src/main/resources/application.properties
+        echo "app.jwt-expiration-milliseconds=${{ secrets.APP_JWT_EXPIRATION}}" >> src/main/resources/application.properties
+    
+    - name: Build with Maven
+      run: mvn -B clean package --file pom.xml
+
+    # Docker 로그인
+    - name: Log in to Docker Hub
+      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+    # Docker 이미지를 빌드하고 Docker Hub에 푸시
+    - name: Build and push Docker image
+      run: |
+        docker build -t ${{ secrets.DOCKER_IMAGE_NAME }} .
+        docker push ${{ secrets.DOCKER_IMAGE_NAME }}
+
+    # EC2 서버로 배포
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_SSH_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }} 
+        script: |
+          # docker 이미지 가져오기
+          docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
+
+          # 현재 존재하는 모든 컨테이너 정지
+          docker stop $(docker ps -a -q) 
+
+          # 새로운 컨테이너를 백그라운드에서 실행
+          docker run -d --log-driver=syslog -p 8080:8080 ${{ secrets.DOCKER_IMAGE_NAME }}
+
+          # 종료된(exited) 상태의 모든 컨테이너 제거
+          docker rm $(docker ps --filter 'status=exited' -a -q)
+
+          # 사용되지 않는 모든 Docker 이미지를 강제로 제거
+          docker image prune -a -f
