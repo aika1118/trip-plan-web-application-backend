@@ -25,6 +25,19 @@ jobs:
         java-version: '22'
         distribution: 'temurin'
         cache: maven
+
+    - name: Create application.properties
+      run: |
+        echo "spring.application.name=trip-backend" >> src/main/resources/application.properties
+        echo "spring.datasource.url=${{ secrets.APP_DB_URL }}" >> src/main/resources/application.properties 
+        echo "spring.datasource.username=${{ secrets.APP_DB_USERNAME}}" >> src/main/resources/application.properties 
+        echo "spring.datasource.password=${{ secrets.APP_DB_PASSWORD}}" >> src/main/resources/application.properties 
+        echo "spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect" >> src/main/resources/application.properties
+        echo "spring.jpa.hibernate.ddl-auto=validate" >> src/main/resources/application.properties
+        echo "spring.jpa.hibernate.naming.physical-strategy = org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl" >> src/main/resources/application.properties
+        echo "app.jwt-secret=${{ secrets.APP_JWT_SECRET}}" >> src/main/resources/application.properties
+        echo "app.jwt-expiration-milliseconds=${{ secrets.APP_JWT_EXPIRATION}}" >> src/main/resources/application.properties
+    
     - name: Build with Maven
       run: mvn -B clean package --file pom.xml
 
