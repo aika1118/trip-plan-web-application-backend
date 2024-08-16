@@ -71,4 +71,4 @@ jobs:
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
 
           # 새로운 컨테이너를 백그라운드에서 실행
-          docker run -d --log-driver=syslog -p 80:80 ${{ secrets.DOCKER_IMAGE_NAME }}
+          docker run -d --log-driver=syslog -p 8080:8080 ${{ secrets.DOCKER_IMAGE_NAME }}
