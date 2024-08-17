@@ -8,6 +8,13 @@ import lombok.Setter;
 
 import java.util.Set;
 
+/**
+ * DailyPlan
+ *
+ * DailyPlan 관련된 Entity 정의
+ *
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,6 +23,7 @@ import java.util.Set;
 @Table(name = "DailyPlans")
 public class DailyPlan {
 
+    // 기본키 정의
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "daily_id")

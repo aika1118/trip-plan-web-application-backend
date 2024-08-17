@@ -3,8 +3,14 @@ package com.wskang.trip.repository;
 import com.wskang.trip.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 import java.util.Optional;
+
+/**
+ * UserRepository
+ *
+ * User 관련된 Repository 정의
+ *
+ */
 
 public interface UserRepository extends JpaRepository<User, Long> {
 

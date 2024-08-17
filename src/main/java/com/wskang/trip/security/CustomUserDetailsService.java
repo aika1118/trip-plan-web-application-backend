@@ -13,6 +13,13 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * CustomUserDetailsService
+ *
+ * 인증을 위해 DB 에서 User 정보를 찾은 후 UserDetails 로 반환하는 class
+ *
+ */
+
 @Service
 @AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {

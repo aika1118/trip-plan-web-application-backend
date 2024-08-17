@@ -10,10 +10,18 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+/**
+ * ValidateUserUtil
+ *
+ * User 관련 검증을 위한 Util
+ *
+ */
+
 @Component
 public class ValidateUserUtil {
     private static UserRepository userRepository; // static은 객체에 속하지 않기 때문에 생성자로 의존성 주입 불가
 
+    // setter 메소드로 의존성 주입
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         ValidateUserUtil.userRepository = userRepository;

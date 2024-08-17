@@ -10,11 +10,17 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+/**
+ * SpringSecurityConfig
+ *
+ * Spring Security 에 사용할 Config 정의
+ *
+ */
 
 @Configuration
 @EnableMethodSecurity // 메소드 레벨 security 적용
@@ -31,8 +37,7 @@ public class SpringSecurityConfig {
         return new BCryptPasswordEncoder(); // 단방향 해시 함수로 비밀번호 안전하게 보관
     }
 
-    // AuthService에서 로그인 구현에 사용할 spring bean 등록
-
+    // AuthServiceImpl 의 login 함수에 사용할 spring bean 등록
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();

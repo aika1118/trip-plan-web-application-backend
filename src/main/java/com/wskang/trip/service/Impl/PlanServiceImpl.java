@@ -1,11 +1,8 @@
 package com.wskang.trip.service.Impl;
 
-import com.wskang.trip.dto.DailyPlanDto;
 import com.wskang.trip.dto.PlanDto;
-import com.wskang.trip.entity.DailyPlan;
 import com.wskang.trip.entity.Plan;
 import com.wskang.trip.entity.User;
-import com.wskang.trip.exception.BadRequestException;
 import com.wskang.trip.exception.ResourceNotFoundException;
 import com.wskang.trip.repository.PlanRepository;
 import com.wskang.trip.repository.UserRepository;
@@ -13,13 +10,17 @@ import com.wskang.trip.service.PlanService;
 import com.wskang.trip.utils.ValidatePlanUtil;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+/**
+ * PlanServiceImpl
+ *
+ * Plan 관련한 Service 구현
+ *
+ */
 
 @Service
 @AllArgsConstructor
@@ -30,6 +31,7 @@ public class PlanServiceImpl implements PlanService {
     private PlanRepository planRepository;
     private ModelMapper modelMapper; // spring bean 이며 생성자를 통해 의존성 주입 진행
 
+    // Plan 추가
     @Override
     public PlanDto addPlan(PlanDto planDto) {
 
@@ -46,6 +48,7 @@ public class PlanServiceImpl implements PlanService {
         return modelMapper.map(savedPlan, PlanDto.class);
     }
 
+    // 특정 id에 속하는 Plan GET 함
     @Override
     public PlanDto getPlan(Long id) {
 
@@ -75,6 +78,7 @@ public class PlanServiceImpl implements PlanService {
                 .collect(Collectors.toList());
     }
 
+    // Plan 정보 update
     @Override
     public PlanDto updatePlan(PlanDto planDto, Long id) {
 
@@ -93,6 +97,7 @@ public class PlanServiceImpl implements PlanService {
         return modelMapper.map(updatedPlan, PlanDto.class);
     }
 
+    // 특정 plan 삭제
     @Override
     public void deletePlan(Long id) {
 

@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * PlanController
+ *
+ * Plan 관련된 REST API 요청을 처리하는 Controller
+ *
+ */
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("api/plans")

@@ -11,6 +11,13 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.util.Date;
 
+/**
+ * JwtTokenProvider
+ *
+ * JWT 생성 및 검증을 수행하는 class
+ *
+ */
+
 @Component
 public class JwtTokenProvider {
 

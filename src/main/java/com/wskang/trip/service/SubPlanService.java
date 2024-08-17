@@ -4,6 +4,13 @@ import com.wskang.trip.dto.SubPlanDto;
 
 import java.util.List;
 
+/**
+ * SubPlanService
+ *
+ * SubPlan 관련 Service 구현을 위한 interface 정의
+ *
+ */
+
 public interface SubPlanService {
     SubPlanDto addSubPlan(SubPlanDto subPlanDto);
 

@@ -1,6 +1,5 @@
 package com.wskang.trip.controller;
 
-
 import com.wskang.trip.dto.JwtAuthResponseDto;
 import com.wskang.trip.dto.LoginDto;
 import com.wskang.trip.dto.RegisterDto;
@@ -9,6 +8,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+/**
+ * AuthController
+ *
+ * 회원가입, 로그인 관련된 REST API 요청을 처리하는 Controller
+ *
+ */
 
 @CrossOrigin("*")
 @AllArgsConstructor

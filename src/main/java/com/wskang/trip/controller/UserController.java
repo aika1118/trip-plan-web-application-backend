@@ -6,6 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * UserController
+ *
+ * User 관련된 REST API 요청을 처리하는 Controller
+ *
+ */
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("api/users")

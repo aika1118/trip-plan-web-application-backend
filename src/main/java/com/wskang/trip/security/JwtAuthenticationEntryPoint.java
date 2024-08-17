@@ -9,7 +9,13 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-// 권한이 없는 사용자가 필요한 리소스에 엑세스 시도 시 예외처리
+/**
+ * JwtAuthenticationEntryPoint
+ *
+ * 권한이 없는 사용자가 필요한 리소스에 엑세스 시도 시 예외처리하는 class
+ *
+ */
+
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override

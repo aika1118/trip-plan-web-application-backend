@@ -5,6 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * LoginDto
+ *
+ * 로그인 요청을 처리하기 위한 DTO 정의
+ *
+ */
+
 @Getter
 @Setter
 @AllArgsConstructor

@@ -4,6 +4,13 @@ import com.wskang.trip.dto.PlanDto;
 
 import java.util.List;
 
+/**
+ * PlanService
+ *
+ * Plan 관련 Service 구현을 위한 interface 정의
+ *
+ */
+
 public interface PlanService {
 
     PlanDto addPlan(PlanDto planDto);

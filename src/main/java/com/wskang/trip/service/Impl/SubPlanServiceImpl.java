@@ -3,20 +3,24 @@ package com.wskang.trip.service.Impl;
 import com.wskang.trip.dto.SubPlanDto;
 import com.wskang.trip.entity.DailyPlan;
 import com.wskang.trip.entity.SubPlan;
-import com.wskang.trip.exception.BadRequestException;
 import com.wskang.trip.exception.ResourceNotFoundException;
 import com.wskang.trip.repository.DailyPlanRepository;
 import com.wskang.trip.repository.SubPlanRepository;
 import com.wskang.trip.service.SubPlanService;
 import com.wskang.trip.utils.ValidateSubPlanUtil;
-import com.wskang.trip.utils.ValidateTimeUtil;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+/**
+ * SubPlanServiceImpl
+ *
+ * SubPlan 관련한 Service 구현
+ *
+ */
 
 @Service
 @AllArgsConstructor
@@ -27,6 +31,7 @@ public class SubPlanServiceImpl implements SubPlanService {
     private SubPlanRepository subPlanRepository;
     private ModelMapper modelMapper; // spring bean 이며 생성자를 통해 의존성 주입 진행
 
+    // SubPlan 추가
     @Override
     public SubPlanDto addSubPlan(SubPlanDto subPlanDto) {
 

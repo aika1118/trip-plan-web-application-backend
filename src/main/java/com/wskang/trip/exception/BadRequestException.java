@@ -4,6 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+/**
+ * BadRequestException
+ *
+ * Bad Request 관련된 Exception 정의
+ *
+ */
+
 
 @Getter
 @AllArgsConstructor

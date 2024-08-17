@@ -1,14 +1,18 @@
 package com.wskang.trip.dto;
 
-import com.wskang.trip.entity.DailyPlan;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.time.LocalTime;
+
+/**
+ * SubPlanDto
+ *
+ * SubPlan 관련된 DTO 정의
+ *
+ */
 
 @Setter
 @Getter

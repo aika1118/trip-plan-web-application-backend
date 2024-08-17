@@ -5,12 +5,18 @@ import com.wskang.trip.entity.User;
 import com.wskang.trip.exception.BadRequestException;
 import com.wskang.trip.exception.ResourceNotFoundException;
 import com.wskang.trip.repository.PlanRepository;
-import com.wskang.trip.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+/**
+ * ValidateDailyPlanUtil
+ *
+ * DailyPlan 관련 검증을 위한 Util
+ *
+ */
 
 @Component
 public class ValidateDailyPlanUtil {
@@ -28,7 +34,7 @@ public class ValidateDailyPlanUtil {
             throw new BadRequestException(HttpStatus.BAD_REQUEST, "Bad Request with no id",
                     "INVALID_ID");
 
-        // 현재 인증된 사용자 가져오기
+        // 현재 인증된 사용자 가져오기 (클라이언트마다 독립된 세션으로 관리됨)
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String usernameOrEmail = authentication.getName();
 

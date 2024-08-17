@@ -1,7 +1,5 @@
 package com.wskang.trip.service.Impl;
 
-import com.wskang.trip.dto.PlanDto;
-import com.wskang.trip.entity.Plan;
 import com.wskang.trip.entity.User;
 import com.wskang.trip.exception.ResourceNotFoundException;
 import com.wskang.trip.repository.UserRepository;
@@ -10,8 +8,12 @@ import com.wskang.trip.utils.ValidateUserUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+/**
+ * UserServiceImpl
+ *
+ * User 관련한 Service 구현
+ *
+ */
 
 @Service
 @AllArgsConstructor

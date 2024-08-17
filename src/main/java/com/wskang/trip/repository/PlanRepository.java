@@ -6,6 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
+/**
+ * PlanRepository
+ *
+ * Plan 관련된 Repository 정의
+ *
+ */
+
 public interface PlanRepository extends JpaRepository<Plan, Long> {
     // 특정 user의 모든 plan 엔티티 목록을 조회하는 메소드
     List<Plan> findByUser(User user);

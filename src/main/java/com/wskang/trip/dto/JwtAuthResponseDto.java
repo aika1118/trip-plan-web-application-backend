@@ -1,10 +1,16 @@
 package com.wskang.trip.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+/**
+ * JwtAuthResponseDto
+ *
+ * login 후 사용자에게 반환될 DTO 정의
+ *
+ */
 
 @Getter
 @Setter

@@ -17,6 +17,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * JwtAuthenticationFilter
+ *
+ * HTTP 요청을 가로채어 JWT 를 추출하고, 이 토큰의 유효성을 검증하는 class
+ *
+ */
+
 @Component
 @AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -24,7 +31,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtTokenProvider jwtTokenProvider;
     private UserDetailsService userDetailsService;
 
-    // HTTP 요청을 가로채어 JWT를 추출하고, 이 토큰의 유효성을 검증
     // 필터 : 웹 애플리케이션에서 요청을 가로채어서 처리하는 기능을 담당하는 컴포넌트
     @Override
     protected void doFilterInternal(HttpServletRequest request,

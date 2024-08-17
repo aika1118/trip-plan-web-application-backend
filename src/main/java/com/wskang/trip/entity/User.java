@@ -9,6 +9,13 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * User
+ *
+ * User 관련된 Entity 정의
+ *
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,6 +24,7 @@ import java.util.Set;
 @Table(name = "Users")
 public class User {
 
+    // 기본키 정의
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")

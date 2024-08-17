@@ -1,8 +1,6 @@
 package com.wskang.trip.controller;
 
-import com.wskang.trip.dto.DailyPlanDto;
 import com.wskang.trip.dto.SubPlanDto;
-import com.wskang.trip.service.DailyPlanService;
 import com.wskang.trip.service.SubPlanService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +9,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+/**
+ * SubPlanController
+ *
+ * SubPlan 관련된 REST API 요청을 처리하는 Controller
+ *
+ */
 
 @CrossOrigin("*")
 @RestController

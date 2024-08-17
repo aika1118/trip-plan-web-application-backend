@@ -1,7 +1,6 @@
 package com.wskang.trip.service.Impl;
 
 import com.wskang.trip.dto.DailyPlanDto;
-import com.wskang.trip.dto.PlanDto;
 import com.wskang.trip.entity.DailyPlan;
 import com.wskang.trip.entity.Plan;
 import com.wskang.trip.exception.ResourceNotFoundException;
@@ -16,6 +15,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * DailyPlanServiceImpl
+ *
+ * DailyPlan 관련한 Service 구현
+ *
+ */
+
 @Service
 @AllArgsConstructor
 public class DailyPlanServiceImpl implements DailyPlanService {
@@ -24,6 +30,7 @@ public class DailyPlanServiceImpl implements DailyPlanService {
     private PlanRepository planRepository;
     private ModelMapper modelMapper;
 
+    // dailyPlan 추가
     @Override
     public DailyPlanDto addDailyPlan(DailyPlanDto dailyPlanDto) {
 

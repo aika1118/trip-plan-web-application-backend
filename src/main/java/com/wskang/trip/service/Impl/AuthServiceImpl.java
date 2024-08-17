@@ -1,6 +1,5 @@
 package com.wskang.trip.service.Impl;
 
-
 import com.wskang.trip.dto.JwtAuthResponseDto;
 import com.wskang.trip.dto.LoginDto;
 import com.wskang.trip.dto.RegisterDto;
@@ -22,8 +21,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
+
+/**
+ * AuthServiceImpl
+ *
+ * 회원가입, 로그인 관련한 Service 구현
+ *
+ */
 
 @Service
 @AllArgsConstructor

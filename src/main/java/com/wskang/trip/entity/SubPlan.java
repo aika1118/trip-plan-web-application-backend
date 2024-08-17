@@ -6,9 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.time.LocalTime;
-import java.util.Set;
+
+/**
+ * SubPlan
+ *
+ * SubPlan 관련된 Entity 정의
+ *
+ */
 
 @Getter
 @Setter
@@ -18,6 +23,7 @@ import java.util.Set;
 @Table(name = "SubPlans")
 public class SubPlan {
 
+    // 기본키 정의
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sub_id")
