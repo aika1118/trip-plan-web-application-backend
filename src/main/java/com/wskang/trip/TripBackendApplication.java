@@ -16,6 +16,7 @@ public class TripBackendApplication {
 	}
 
 	public static void main(String[] args) {
+		// 구글 클라우드 일반계정 전환 후 public ip 변경
 		SpringApplication.run(TripBackendApplication.class, args);
 	}
 }
